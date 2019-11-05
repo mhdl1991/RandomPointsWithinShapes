@@ -1,5 +1,5 @@
 import math
-from random import random as rand #smaller name
+from random import random as rand #shorter name
 
 def random_point_on_line(x1,y1,x2,y2):
     """generates a random point x,y between the points x1,y1 and x2,y2 using a Lerp method"""
@@ -47,9 +47,18 @@ def random_point_in_tri(*list_points):
     #the total of _x and _y should not be greater than 1
     _u, _v = 0,0
     #This method will likely be slow
+    #find a better method
     while True:
         _u, _v = rand(), rand()
         if _u + _v <= 1: break
+    
+    #This method is worse, it causes the points to "cluster" near the two "opposite" corners
+    #if rand() > 0.5:
+    #    _u = rand()
+    #    _v = (1 - _u) * rand()
+    #else:
+    #    _v = rand()
+    #    _u = (1 - _v) * rand()
 
         
     rand_x, rand_y = x0 + (ux * _u) + (vx * _v), y0 + (uy * _u) + (vy * _v)
@@ -73,6 +82,6 @@ def random_point_in_poly(*list_points):
         print("That is a triangle")
         return random_point_in_tri(*list_points)
         
-    #WIP
+
     pass
         
