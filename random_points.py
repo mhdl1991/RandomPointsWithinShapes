@@ -22,7 +22,7 @@ def random_point_in_tri(*list_points):
     #Some inspiration taken from Wolfram MathWorld
     if len(list_points) is not 3:
         print("improper number of points in the list")
-        return None #not sure how else to handle this right now
+        return (0,0) #not sure how else to handle this right now
         
     x0,y0 = list_points[0] #this will be our "corner" vertex and treated as 0,0
     x1,y1 = list_points[1]
@@ -42,10 +42,10 @@ def random_point_in_tri(*list_points):
     while True:
         _u, _v = rand(), rand()
         if _u + _v <= 1: break
-    #Try this instead?
-    #_x = rand()
-    #_y = (1 - _x) * rand()
-        
+    
     rand_x, rand_y = x0 + (dx1 * _u) + (dx2 * _v), y0 + (dy1 * _u) + (dy2 * _v)
+    
     return (rand_x, rand_y)
     
+    
+
