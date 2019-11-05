@@ -1,6 +1,14 @@
 import math
 from random import random as rand #smaller name
 
+def random_point_on_line(x1,y1,x2,y2):
+    """generates a random point x,y between the points x1,y1 and x2,y2 using a Lerp method"""
+    u = rand()
+    rand_x = (u * x1) + ((1-u) * x2)
+    rand_y = (u * y1) + ((1-u) * y2)
+    return (rand_x, rand_y)
+    
+
 def random_point_in_circle(c, r):
     """generates a random point (x,y coordinates) that lies within a circle at center c and radius r"""
     x,y = c
@@ -28,12 +36,12 @@ def random_point_in_tri(*list_points):
     x1,y1 = list_points[1]
     x2,y2 = list_points[2]
     
-    ux, uy = x1-x0, y1-y0 #vectors of each of the vertexes from the "corner" vertex
+    ux, uy = x1-x0, y1-y0 #distances of each of the vertexes from the "corner" vertex
     vx, vy = x2-x0, y2-y0
     
     #The method we're using would technically produce a random point in a parallelogram that is comprised of two copies of the original triangle
-    #we model this parallelogram as a scaled version of the unit square
-    #(_u, _v) will be a point within this unit square
+    #we model this parallelogram as a scaled version of the unit square (0,0,1,1)
+    #(rand_x,rand_y) will be a point within this unit square
     #we need to make sure it stays within HALF of said unit square
     
     #the total of _x and _y should not be greater than 1
@@ -47,3 +55,24 @@ def random_point_in_tri(*list_points):
     rand_x, rand_y = x0 + (ux * _u) + (vx * _v), y0 + (uy * _u) + (vy * _v)
     
     return (rand_x, rand_y)
+    
+#Create random point in an arbitrary polygon
+def random_point_in_poly(*list_points):
+    #does not work for empty, single points
+    if len(list_points) in (0,1):
+        print("That is not enough points to make a polygon")
+        return (0,0)
+        
+    #if you passed in a line
+    if len(list_points) is 2:
+        print("That is a line segment")
+        return random_point_on_line(*list_points)
+    
+    #if you passed a triangle
+    if len(list_points) is 3:
+        print("That is a triangle")
+        return random_point_in_tri(*list_points)
+        
+    #WIP
+    pass
+        
