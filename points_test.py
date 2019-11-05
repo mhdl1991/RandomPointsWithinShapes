@@ -1,6 +1,6 @@
 import pyglet, itertools
 from pyglet.window import mouse
-import random_points_py36 as r #put this in the same folder
+import random_points as r #put this in the same folder
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 800
@@ -26,13 +26,10 @@ ft = pyglet.font.load("Terminal", 12)
 describe_label = pyglet.font.Text(ft, x = 8, y = 800-16)
 describe_label.text = "drawing {} red dots randomly within the white triangle. Left-click to generate another set of random points".format(NUMBER_POINTS)
 
-
 @window.event        
 def on_mouse_press(x, y, button, modifiers):
     global list_points
     if button == mouse.LEFT: list_points = random_points()
-
-
 
 @window.event
 def on_draw():
@@ -43,6 +40,5 @@ def on_draw():
     pyglet.graphics.draw(3, pyglet.gl.GL_TRIANGLES, ('v2f', list_tri), ('c3B', (255,255,255) * 3 ) )
     #Draw the points
     pyglet.graphics.draw(NUMBER_POINTS, pyglet.gl.GL_POINTS, ('v2f', list_points ), ('c3B', (255,0,0) * NUMBER_POINTS ) )
-    
     
 pyglet.app.run()
