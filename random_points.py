@@ -22,18 +22,18 @@ def random_point_in_tri(*list_points):
     #Some inspiration taken from Wolfram MathWorld
     if len(list_points) is not 3:
         print("improper number of points in the list")
-        return (0,0) #not sure how else to handle this right now
+        return None #not sure how else to handle this right now
         
     x0,y0 = list_points[0] #this will be our "corner" vertex and treated as 0,0
     x1,y1 = list_points[1]
     x2,y2 = list_points[2]
     
-    dx1, dy1 = x1-x0, y1-y0 #distances of each of the vertexes from the "corner" vertex
-    dx2, dy2 = x2-x0, y2-y0
+    ux, uy = x1-x0, y1-y0 #vectors of each of the vertexes from the "corner" vertex
+    vx, vy = x2-x0, y2-y0
     
     #The method we're using would technically produce a random point in a parallelogram that is comprised of two copies of the original triangle
-    #we model this parallelogram as a scaled version of the unit square (0,0,1,1)
-    #(rand_x,rand_y) will be a point within this unit square
+    #we model this parallelogram as a scaled version of the unit square
+    #(_u, _v) will be a point within this unit square
     #we need to make sure it stays within HALF of said unit square
     
     #the total of _x and _y should not be greater than 1
@@ -42,10 +42,8 @@ def random_point_in_tri(*list_points):
     while True:
         _u, _v = rand(), rand()
         if _u + _v <= 1: break
-    
-    rand_x, rand_y = x0 + (dx1 * _u) + (dx2 * _v), y0 + (dy1 * _u) + (dy2 * _v)
+
+        
+    rand_x, rand_y = x0 + (ux * _u) + (vx * _v), y0 + (uy * _u) + (vy * _v)
     
     return (rand_x, rand_y)
-    
-    
-
