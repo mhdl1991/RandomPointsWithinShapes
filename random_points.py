@@ -18,6 +18,7 @@ def random_point_in_rect(x1,y1,x2,y2):
     
 def random_point_in_tri(*list_points):
     """generates a random point that lies within a triangle defined by three x,y coordinates, with the first point in list treated as a 'corner' vertex"""
+    
     #Some inspiration taken from Wolfram MathWorld
     if len(list_points) is not 3:
         print("improper number of points in the list")
@@ -35,11 +36,18 @@ def random_point_in_tri(*list_points):
     #(rand_x,rand_y) will be a point within this unit square
     #we need to make sure it stays within HALF of said unit square
     
+    #the total of _x and _y should not be greater than 1
     _x, _y = 0,0
+    #This method will likely be slow
     while True:
         _x, _y = rand(), rand()
         if _x + _y <= 1: break
+    #Try this instead?
+    # _x = rand()
+    # _y = (1 - _x) * rand()
         
     rand_x, rand_y = x0 + (dx1 * _x) + (dx2 * _x), y0 + (dy1 * _y) + (dy2 * _y)
     
     return (rand_x, rand_y)
+    
+
