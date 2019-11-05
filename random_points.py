@@ -37,17 +37,15 @@ def random_point_in_tri(*list_points):
     #we need to make sure it stays within HALF of said unit square
     
     #the total of _x and _y should not be greater than 1
-    _x, _y = 0,0
+    _u, _v = 0,0
     #This method will likely be slow
     while True:
-        _x, _y = rand(), rand()
-        if _x + _y <= 1: break
+        _u, _v = rand(), rand()
+        if _u + _v <= 1: break
     #Try this instead?
-    # _x = rand()
-    # _y = (1 - _x) * rand()
+    #_x = rand()
+    #_y = (1 - _x) * rand()
         
-    rand_x, rand_y = x0 + (dx1 * _x) + (dx2 * _x), y0 + (dy1 * _y) + (dy2 * _y)
-    
+    rand_x, rand_y = x0 + (dx1 * _u) + (dx2 * _v), y0 + (dy1 * _u) + (dy2 * _v)
     return (rand_x, rand_y)
     
-
